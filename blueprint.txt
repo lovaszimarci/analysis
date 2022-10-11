@@ -1,0 +1,19 @@
+kell egy input function --> 
+
+
+aray_for_y = numbers from 0 to 51
+
+
+kordinatak map
+
+std::map<int, int> kordinatak;
+
+
+for(int number_of_x = 0; number_of_x < 51, number_of_x++){
+    
+    kordinatak.insert({number_of_x,aray_for_y[number_of_x]});
+
+}
+
+
+the print will be in collumns

@@ -1,21 +1,26 @@
 #include <iostream>
-
-
-
-
+#include <string>
+#include <map>
 
 
 
 
 int main()
 {
-    //graph axis base creation 
-    char** graph = new char*[50];   // 50 char in heap
-    for(int i = 0; i < 50; i++){
-        graph[i] = new char[50];    // for every char in heap plus 50 char
+
+    std::map<int, int> kordinatak;
+
+    kordinatak.insert({1,2});
+
+    for(auto& i : kordinatak){
+
+        
+        std::cout<< i.first;
+        std::cout<< i.second;
+        
     }
-
-
-
-
 }
+
+
+
+
