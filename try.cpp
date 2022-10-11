@@ -2,6 +2,8 @@
 #include <iomanip>
 
 
+// finsihed 10x10 table
+
 int main()
 {
     char hihi[10] = {'x','x','x','x','x','x','x','x','x','x',};

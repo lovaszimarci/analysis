@@ -16,4 +16,13 @@ for(int number_of_x = 0; number_of_x < 51, number_of_x++){
 }
 
 
-the print will be in collumns
+
+
+check at print 
+
+exaple if there is 2* 50 value in the row of 50
+one belongs to x = 3 --> key
+the other is x = 5
+
+modification --> data_print_row[key] = # change value to 100 --- it cant be accesed twice (you cant delete it)
+
