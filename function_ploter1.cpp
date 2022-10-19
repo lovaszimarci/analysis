@@ -7,38 +7,36 @@
 #include <map>
 #include <vector>
  
+//2d vector for the base of the cordinate space
 std::vector<std::vector<std::string>> matrix;
- 
+//the upper part of the y axis
 std::vector<std::string> from_1_to_25{" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "
 ," "," "," "," ","+"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "};
- 
+//x axis
 std::vector<std::string> x_axis{"+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+"
 ,"+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+","+"};
- 
+// the lower part of the y axis
 std::vector<std::string> from_minus1_to_minus25{" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "
 ," "," "," "," ","+"," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "};
  
- 
+//map to store the data pairs for the plotting
 std::map<int ,int> values;
+
+
+//might need them for an iterator solution 
+//std::vector<std::vector<std::string>>::iterator row_vector_ptr;
+//std::vector<std::string>::iterator col_vector_ptr;
  
-std::vector<std::vector<std::string>>::iterator row_vector_ptr;
-std::vector<std::string>::iterator col_vector_ptr;
  
  
- 
- 
+// fills the the data pairs with the basic values ex: 1-->1 
 void fill_base_map_values(){
    for(int i = -25; i < 26; i++){
        values.insert({i,i});
    }
 }
  
-void log_print_map(){
-   for(auto& i : values){
-       std::cout<< i.first << " "<< i.second<<std::endl;
-   }
-}
- 
+// fillst the matrix with the preinitialized vectors
 void fill_base_matrix(){
  
    for(int i = 0; i < 25; i++){
@@ -50,7 +48,20 @@ void fill_base_matrix(){
        matrix.push_back(from_minus1_to_minus25);
    }
 }
+
+//tool for test
+void log_print_map(){
+   for(auto& i : values){
+       std::cout<< i.first << " "<< i.second<<std::endl;
+   }
+}
+//tool for test
+void log_print_matrix(){
+   matrix[25 - 3][25 - 2] = "#";
+}
  
+ 
+//this is the input function --> modifies the values of the bas map
 void input(){
   std::string input; 
   std::string modification_number_string;
@@ -101,7 +112,7 @@ void input(){
    }
 }
  
- 
+// the final print of the matrix
 void print_matrix(){
    for(int i = 0; i < matrix.size(); i++){
        for(int j= 0; j<matrix[i].size(); j++){
@@ -110,8 +121,9 @@ void print_matrix(){
        std::cout<<std::endl;
    }
 }
- 
-void checkfor_over_or_uner_values(){
+
+// check if theres any values that cant be visualized due to the lack of space
+void checkfor_over_or_under_values(){
    for(auto&c : values){
        if(c.second > 25 || c.second < -25){
            c.second = 100;
@@ -123,10 +135,7 @@ void checkfor_over_or_uner_values(){
  
 //}
  
-void log_print_matrix(){
-   matrix[25 - 3][25 - 2] = "#";
-}
- 
+// it changes the matrix with the modified values from the map
 void change_matrix(){
   
    for(auto & c: values){
@@ -184,11 +193,9 @@ void change_matrix(){
 int main()
 {  
    fill_base_map_values();
- //  log_print_map();
    fill_base_matrix();
    input();
-   checkfor_over_or_uner_values();
-   //change_matrix();
+   checkfor_over_or_under_values();
    change_matrix();
    print_matrix();
   
