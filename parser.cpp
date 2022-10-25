@@ -8,7 +8,7 @@
 #include <algorithm>
  
  
-std::string input = "2/(x+16)*2";
+std::string input = "64/(x+16)*2";
  
 int number_of_intIndex;
 int int_number = 0;
@@ -20,9 +20,23 @@ std::string before_x;
  
 std::string::iterator str_it;
 char base_numbers[10] = {'0','1','2','3','4','5','6','7','8','9'};
+char arithmetic_operators[6] = {'-', '+', '/', 'R', '^', '*'};
  
+bool isEelement_of_arithmetic_operators(char character){
+   char target = character;
  
-bool isEelement(char character){
+   for(auto& c : arithmetic_operators){
+       if(c == target){
+           std::cout<<"valid ar ";
+           return true;
+          
+       }
+   }
+   std::cout<<"false ar ";
+   std::cout<< target;
+   return false;
+}
+bool isEelement_of_basenumbers(char character){
    char target = character;
  
    for(auto& c : base_numbers){
@@ -66,6 +80,8 @@ void functionStringParser(std::string inputString){
        }
    }
  
+
+    // it substract the parts before x from the string
    std::string::size_type i = inputString.find(before_x);
  
    if(i != std::string::npos){
@@ -76,13 +92,13 @@ void functionStringParser(std::string inputString){
  
    std::cout<< before_x<< " ";
    std::cout<< inputString;
- 
+ // starts the evalueation ofthe string after x
    for(str_it = inputString.begin(); str_it != inputString.end(); str_it++){
        std::cout<< "begin " <<*str_it << " ";
        index_position += 1;
        if( *str_it == '+'){
            number_of_intIndex = 1;
-           while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+           while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                str_number +=(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]);
                number_of_intIndex++;
                std::cout<<str_number;
@@ -101,7 +117,7 @@ void functionStringParser(std::string inputString){
        }
        else if( *str_it == '-'){
            number_of_intIndex = 1;
-           while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+           while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                str_number = str_number + inputString[inputString.find(*str_it) + number_of_intIndex];
                number_of_intIndex++;
            }
@@ -117,7 +133,7 @@ void functionStringParser(std::string inputString){
        }
        else if( *str_it == '/'){
            number_of_intIndex = 1;
-           while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+           while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                str_number = str_number + inputString[inputString.find(*str_it) + number_of_intIndex];
                number_of_intIndex++;
            }
@@ -134,7 +150,7 @@ void functionStringParser(std::string inputString){
       
        else if( *str_it == '*'){
                number_of_intIndex = 1;
-               while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+               while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                    str_number = str_number + inputString[inputString.find(*str_it, index_position) + number_of_intIndex];
                    number_of_intIndex++;
                    }
@@ -150,7 +166,7 @@ void functionStringParser(std::string inputString){
        }
        else if( *str_it == '^'){
            number_of_intIndex = 1;
-           while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+           while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                str_number = str_number + inputString[inputString.find(*str_it, index_position) + number_of_intIndex];
                number_of_intIndex++;
                }
@@ -165,7 +181,7 @@ void functionStringParser(std::string inputString){
        }
        else if( *str_it == 'R'){
            number_of_intIndex = 1;
-           while(isEelement(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
+           while(isEelement_of_basenumbers(inputString[inputString.find(*str_it, index_position) + number_of_intIndex]) == true){
                str_number = str_number + inputString[inputString.find(*str_it, index_position) + number_of_intIndex];
                number_of_intIndex++;
                }
@@ -183,22 +199,25 @@ void functionStringParser(std::string inputString){
    std::string str_number_before = "";
    int int_number_before;
  
-   str_it = before_x.begin();
-   if(str_it != before_x.end()){
+   str_it = before_x.end();
+   if(isEelement_of_arithmetic_operators(before_x[before_x.size() - 2]) == true){
        for(str_it = before_x.begin(); str_it != before_x.end(); str_it++){
            index_position_before = -1;
            if(*str_it == '/'){
-               while(isEelement(before_x[before_x.find(*str_it) + index_position_before]) == true){
+               while(isEelement_of_basenumbers(before_x[before_x.find(*str_it) + index_position_before]) == true){
                    str_number_before = str_number_before + before_x[before_x.find(*str_it) + index_position_before];
                    index_position_before --;
                }
                reverseStr(str_number_before);
                int_number_before = std::stoi(str_number_before);
-               std::cout<< int_number_before;
+               std::cout<< int_number_before / int_number;
  
            }
        }
-   }
+    }
+    else{
+        std::cout<< int_number;
+    }
  
 }
  
