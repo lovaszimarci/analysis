@@ -26,6 +26,8 @@ std::map<int ,int> values;
 //might need them for an iterator solution 
 //std::vector<std::vector<std::string>>::iterator row_vector_ptr;
 //std::vector<std::string>::iterator col_vector_ptr;
+
+std::map<int, int>::iterator map_iter;
  
  
  
@@ -131,9 +133,31 @@ void checkfor_over_or_under_values(){
    }
 }
  
-//void check_for_duplicates(){
- 
-//}
+void check_for_duplicates(){
+
+    for(map_iter = values.begin(); map_iter != values.end(); ++map_iter){
+        
+
+        // ha c.s < 0 then delete current
+        if(map_iter ->first < 0 && map_iter -> second == std::next(map_iter) ->second){
+            values.erase(map_iter++);
+        }
+        /*
+        // ha c.s = 0 then delete current and delet next
+        if(current == 0 && current == next && current == previous){
+            values.erase(previous);
+            values.erase(next);
+        }
+        */
+        if(map_iter -> first > 0 && map_iter->second == std::prev(map_iter) ->second){
+            values.erase(map_iter--);
+        }
+    
+
+            
+        
+    }
+}
  
 // it changes the matrix with the modified values from the map
 void change_matrix(){
@@ -196,6 +220,8 @@ int main()
    fill_base_matrix();
    input();
    checkfor_over_or_under_values();
+   check_for_duplicates();
+   log_print_map();
    change_matrix();
    print_matrix();
   
@@ -208,6 +234,4 @@ int main()
 }
  
  
- 
-
  
